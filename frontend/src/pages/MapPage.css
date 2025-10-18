@@ -1,0 +1,435 @@
+/* File: MapPage.css (clean & final) */
+:root{
+  --bg:#000;
+  --frame-purple:#9e2aff;
+  --max-w:1100px;
+}
+
+/* Page root */
+html,body,#root{height:100%;margin:0;background:var(--bg);}
+.map-screen{
+  min-height:100vh;
+  background:var(--bg);
+  color:#fff;
+  box-sizing:border-box;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* header (visually centered) */
+.header{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:18px;
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  pointer-events:none;
+}
+.glow-title{
+  font-family:"Times New Roman", Times, serif;
+  font-size:54px;
+  font-weight:900;
+  margin:0;
+  color:#fff;
+  text-shadow:0 0 18px rgba(255,255,255,0.95), 0 6px 12px rgba(0,0,0,0.8);
+}
+.siren{
+  width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #ff4d4d 0%, #c20000 70%, #5a0000 100%);
+  box-shadow:0 0 22px 6px rgba(255,50,50,0.8), inset 0 0 8px rgba(255,255,255,0.25);
+  animation:sirenPulse 1.8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes sirenPulse{0%{box-shadow:0 0 18px 6px rgba(255,80,80,0.7)}50%{box-shadow:0 0 36px 12px rgba(255,0,0,0.9);transform:translateY(-1px)}100%{box-shadow:0 0 18px 6px rgba(255,80,80,0.7)}}
+
+/* top-left home badge & back */
+.home-badge{position:fixed;top:14px;left:14px;width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;z-index:9999;background:radial-gradient(circle at 35% 30%, #ff4d4d 0%, #c20000 60%, #7a0000 100%);box-shadow:0 0 20px rgba(255,0,0,0.6),0 6px 0 rgba(0,0,0,0.35);text-decoration:none;color:#fff;}
+.back-btn{position:fixed;top:22px;left:116px;color:#fff;text-decoration:none;font-weight:700;z-index:10002;}
+
+/* center wrapper - holds map + feed, centered and constrained */
+.center-wrapper{
+  width:100%;
+  max-width:var(--max-w);
+  margin:200px auto 60px; /* space under header */
+  padding:0 20px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+}
+
+/* purple framed map */
+.map-wrapper{
+  width:100%;
+  max-width:var(--max-w);
+  padding:8px;
+  box-sizing:border-box;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:2px;
+  border:4px solid var(--frame-purple);
+  box-shadow:0 10px 0 rgba(0,0,0,0.55), inset 0 6px 0 rgba(255,255,255,0.02);
+  display:flex;
+  justify-content:center; /* center child */
+}
+
+/* The Google Map container class (used in MapView) */
+.google-map-container{
+  width:100%;
+  max-width:1100px;
+  height:680px;
+  margin:0 auto;
+  display:block;
+  box-sizing:border-box;
+}
+
+/* Force the google map inner div to fill & stay centered */
+.google-map-container > div{
+  width:100% !important;
+  height:100% !important;
+  margin:0 auto !important;
+  box-sizing:border-box;
+}
+
+/* feed area (centered beneath map by default) */
+.feed-wrapper{
+  width:100%;
+  max-width:var(--max-w);
+  margin:0 auto;
+  box-sizing:border-box;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* map loading fallback */
+.map-loading{height:680px;display:flex;align-items:center;justify-content:center;color:#fff;}
+
+/* Responsive: stack and reduce spacing */
+@media (max-width:980px){
+  .center-wrapper{margin:140px auto 40px; padding:0 12px; max-width:100%;}
+  .google-map-container{height:460px;}
+  .home-badge{width:72px;height:72px;font-size:34px;left:10px;top:10px;}
+  .back-btn{left:12px;top:10px;}
+  .header{position:relative;left:auto;transform:none;top:auto;margin-top:10px;pointer-events:auto;}
+}
+
+/* Optional: side-by-side on very wide screens */
+@media (min-width:1280px){
+  .center-wrapper{flex-direction:row;align-items:flex-start;gap:36px;}
+  .map-wrapper,.feed-wrapper{width:50%;}
+  .google-map-container{max-width:100%;height:720px;}
+}
+
+
+/* ===== FORCE CENTER OVERRIDES (paste at end of MapPage.css) ===== */
+.center-wrapper {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 220px auto 60px !important; /* center by auto margins */
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 28px !important;
+}
+
+/* ensure the purple frame centers its child */
+.map-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+}
+
+/* the Google Map container must be a centered block */
+.google-map-container {
+  width: 100% !important;
+  max-width: 1100px !important;
+  height: 680px !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* ensure the internal google child fills the container */
+.google-map-container > div {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* center feed wrapper too */
+.feed-wrapper {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 18px auto 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* --- Strong center fixes (paste at end) --- */
+
+/* Always center the center-wrapper and its children */
+.center-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;      /* center columns horizontally */
+  justify-content: center !important;  /* center vertically within wrapper */
+  margin: 220px auto 60px !important;
+  gap: 28px !important;
+}
+
+/* Wide screens: side-by-side but keep the pair centered */
+@media (min-width:1280px) {
+  .center-wrapper {
+    flex-direction: row !important;
+    align-items: center !important;     /* changed from flex-start -> center */
+    justify-content: center !important; /* center the row horizontally */
+    gap: 36px !important;
+  }
+
+  /* give each column a controlled width so the pair centers neatly */
+  .map-wrapper,
+  .feed-wrapper {
+    width: calc(50% - 18px) !important; /* two columns with gap compensation */
+    max-width: 560px !important;        /* keep columns from ballooning */
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Ensure the purple frame centers its inner content */
+.map-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+}
+
+/* Ensure the map container and its inner google div are centered blocks */
+.google-map-container {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+}
+.google-map-container > div {
+  margin: 0 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Ensure feed content (component root) is centered inside the feed-wrapper,
+   but do NOT force text within feed items to be centered (so lists remain readable). */
+.feed-wrapper > * {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 100% !important;
+}
+
+/* Small helper: if some global rule sets text-align:left, this keeps container centered
+   without changing the text alignment of individual feed items. */
+.feed-wrapper,
+.map-wrapper {
+  text-align: initial !important;
+}
+
+
+/* Force AlertsFeed inner container to center */
+.feed-wrapper > * {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;   /* center all children horizontally */
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+.feed-wrapper > * {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;   /* center all children horizontally */
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 100% !important;
+  text-align: center; /* if you want the text inside items centered */
+}
+
+
+/* MapPage.css or AlertsFeed.css */
+.alerts-feed-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* horizontally center all children */
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.alerts-feed-inner ul {
+  list-style-position: inside;  /* remove default left padding */
+  padding-left: 0;              /* remove default left padding */
+  text-align: center;            /* center the list text */
+}
+
+.alerts-feed-inner li {
+  margin: 4px 0;                 /* spacing between items */
+}
+
+
+/* ===== Emergency: absolute-center + debug helpers (paste at end) ===== */
+
+/* Debug outlines — remove after testing */
+.center-wrapper.debug-on,
+.map-wrapper.debug-on,
+.feed-wrapper.debug-on,
+.alerts-feed-inner.debug-on,
+.google-map-container.debug-on {
+  outline: 2px dashed rgba(120, 255, 120, 0.9);
+}
+
+/* 1) Force true centering of the center-wrapper regardless of parent layout */
+.center-wrapper {
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(1100px, calc(100% - 40px)) !important; /* keeps spacing on small screens */
+  max-width: 1100px !important;
+  margin: 220px 0 60px !important; /* remove auto horizontal margins so left/transform do the centering */
+  padding: 0 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 28px !important;
+  box-sizing: border-box !important;
+}
+
+/* 2) Ensure child columns stay centered inside the wrapper */
+.map-wrapper,
+.feed-wrapper {
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  display: block !important; /* let their inner content control layout */
+}
+
+/* 3) Make the google map container block-level and centered */
+.google-map-container {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  box-sizing: border-box !important;
+}
+
+/* 4) Make the alerts feed shrink-to-content and center the list */
+.alerts-feed-inner {
+  display: block !important;
+  margin: 0 auto !important;
+  width: auto !important;                /* shrink to content (so it doesn't bleed left) */
+  max-width: 100% !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+.alerts-feed-inner > ul {
+  display: inline-block !important;      /* key: shrink-to-content */
+  padding: 0 !important;
+  margin: 0 auto !important;
+  list-style: none !important;           /* remove bullets/built-in indentation */
+  text-align: left !important;           /* keep li text left-aligned within the centered block (or switch to center if desired) */
+}
+.alerts-feed-inner > ul > li {
+  margin: 6px 0 !important;
+}
+
+
+/* ===== NUCLEAR CENTER RESET - paste at end of MapPage.css ===== */
+
+/* 1) Reset any strange layout on top-level ancestors (forces normal block flow) */
+html, body, #root, .map-screen {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 2) Force the central wrapper to be an auto-margined centered block */
+.center-wrapper {
+  position: relative !important;    /* safe, not absolute */
+  left: auto !important;
+  transform: none !important;
+  display: block !important;
+  width: min(1100px, calc(100% - 40px)) !important;
+  max-width: 1100px !important;
+  margin: 220px auto 60px !important; /* auto left/right centers it */
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
+  text-align: left !important; /* keep content text readable unless changed below */
+}
+
+/* 3) Make the children behave like centered blocks inside the wrapper */
+.map-wrapper, .feed-wrapper {
+  display: block !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 4) Make the map container block-centered and ensure the internal Google div fills properly */
+.google-map-container {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  height: 680px !important;
+  box-sizing: border-box !important;
+}
+.google-map-container > div {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* 5) Force the Alerts feed to shrink-wrap its content and center */
+.alerts-feed-inner {
+  display: block !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+.alerts-feed-inner > ul {
+  display: inline-block !important; /* shrink to content width */
+  padding: 0 !important;
+  margin: 0 auto !important;
+  list-style: none !important;
+  text-align: left !important; /* keep list items left within the centered block */
+}
+.alerts-feed-inner > ul > li {
+  margin: 6px 0 !important;
+}
+
+/* 6) Final safety: neutralize likely global flex rules that force left-justification */
+#root [style*="display:flex"], html [style*="display:flex"], body [style*="display:flex"] {
+  display: block !important;
+}
+
+/* End nuclear reset */

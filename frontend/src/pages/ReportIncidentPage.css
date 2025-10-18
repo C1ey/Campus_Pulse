@@ -1,0 +1,268 @@
+/* File: ReportIncidentPage.css (optimized) */
+
+:root{
+  --bg: #000;
+  --pill-white: #fff;
+  --pill-dark: #4f4f4f;
+  --shadow: rgba(0,0,0,0.65);
+  --title-font: "Times New Roman", Times, serif;
+
+  /* layout variables */
+  --max-w: 980px;
+  --row-max-w: 900px;
+  --form-gap: 22px;
+  --form-top-space: 180px; /* current comfortable spacing */
+}
+
+/* ---------- Page root ---------- */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg); /* optional: ensure app background matches page */
+}
+
+.report-incident-page{
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--bg);
+  color: #fff;
+  padding-top: 10px;
+  font-family: var(--title-font);
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---------- Left badge & back button (fixed) ---------- */
+.exclamation-badge{
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff7a7a 0%, #cc0000 60%, #8b0000 100%);
+  border: 6px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(255,0,0,0.65), 0 6px 0 rgba(0,0,0,0.35);
+  z-index: 9000; /* sits under header */
+}
+.exclamation-badge .bang{
+  color: #fff;
+  font-weight: 900;
+  font-size: 44px;
+  text-shadow: 0 0 8px rgba(255,255,255,0.9);
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+.back-btn{
+  position: fixed;
+  top: 22px;
+  left: 116px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  z-index: 10002; /* highest so it's always clickable */
+}
+
+/* ---------- Header (centered visually) ---------- */
+.header{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 18px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  pointer-events: none; /* back-btn stays clickable */
+}
+
+/* glow title */
+.glow-title{
+  font-size: 54px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0 0 18px rgba(255,255,255,0.95), 0 6px 12px rgba(0,0,0,0.8);
+  pointer-events: none;
+}
+
+/* pulsing siren (inline with title) */
+.siren{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff4d4d 0%, #c20000 70%, #5a0000 100%);
+  box-shadow: 0 0 25px 6px rgba(255,50,50,0.85), 0 0 40px 12px rgba(255,0,0,0.6), inset 0 0 12px rgba(255,255,255,0.4);
+  margin-left: 8px;
+  will-change: box-shadow, transform;
+  pointer-events: none;
+  animation: sirenPulse 1.4s ease-in-out infinite;
+}
+
+/* lighten the pulse a bit for perf while preserving look */
+@keyframes sirenPulse{
+  0% { box-shadow: 0 0 18px 6px rgba(255,80,80,0.8); }
+  50% { box-shadow: 0 0 36px 12px rgba(255,0,0,0.9); transform: translateY(-1px); }
+  100% { box-shadow: 0 0 18px 6px rgba(255,80,80,0.8); }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .siren { animation: none; box-shadow: 0 0 18px 6px rgba(255,80,80,0.8); transform: none; }
+}
+
+/* ---------- Form (centered, constrained) ---------- */
+.form-container{
+  width: 100%;
+  max-width: var(--max-w);
+  margin: var(--form-top-space) auto 0; /* main top spacing below header */
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* each row */
+.row{
+  width: 100%;
+  max-width: var(--row-max-w);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--form-gap);
+  margin: var(--form-gap) 0;
+  box-sizing: border-box;
+}
+
+/* label column */
+.label{
+  flex: 0 0 30%;
+  min-width: 180px;
+  text-align: right;
+  padding-right: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #f8f8f8;
+}
+
+/* controls column */
+.controls{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* pills / inputs */
+.pill-select, .input-pill{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--pill-white);
+  color: #111;
+  border: none;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 10px 14px 0 var(--shadow);
+  outline: none;
+  min-width: 320px; /* comfortable minimum */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* location pill */
+.location-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg,#6a6a6a,#4a4a4a);
+  color: #fff;
+  border: none;
+  padding: 14px 34px;
+  border-radius: 999px;
+  font-size: 20px;
+  font-weight: 800;
+  box-shadow: 10px 14px 0 var(--shadow);
+  cursor: pointer;
+}
+.location-pill .pin { font-size: 20px; }
+
+/* description and textarea */
+.desc-label{
+  margin-top: 32px;
+  margin-bottom: 18px;
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+.textarea-pill{
+  width: 90%;
+  max-width: 900px;
+  height: 170px;
+  border-radius: 80px;
+  padding: 28px;
+  background: var(--pill-white);
+  color: #111;
+  border: none;
+  resize: none;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 12px 18px 0 var(--shadow);
+  outline: none;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+/* submit */
+.submit-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+  margin-bottom: 60px;
+}
+.send-pill{
+  background: linear-gradient(180deg,#fff,#f5f5f5);
+  color: #111;
+  padding: 14px 44px;
+  border-radius: 999px;
+  font-size: 20px;
+  font-weight: 800;
+  border: none;
+  box-shadow: 10px 14px 0 var(--shadow);
+  cursor: pointer;
+}
+.send-pill:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 880px){
+  :root {
+    --form-top-space: 120px;
+  }
+
+  .header{ position: relative; left: auto; transform: none; top: auto; margin-top: 10px; pointer-events: auto; }
+  .siren{ width: 42px; height: 42px; }
+  .exclamation-badge{ width: 72px; height: 72px; left: 10px; top: 10px; }
+
+  .row{ width: 92%; flex-direction: column; gap: 12px; align-items: stretch; }
+  .label{ width: 100%; text-align: left; padding-right: 0; font-size: 20px; min-width: 0; }
+  .controls{ width: 100%; justify-content: space-between; }
+  .textarea-pill, .pill-select, .input-pill{ width: 100%; box-sizing: border-box; min-width: 0; }
+  .desc-label{ font-size: 22px; }
+  .glow-title{ font-size: 40px; }
+}

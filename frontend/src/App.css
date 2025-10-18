@@ -1,0 +1,202 @@
+/* ---------------------------
+   App.css (final — copy/paste)
+   ---------------------------
+*/
+
+/* --- Emergency Button Styling --- */
+.emergency-btn {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  background: radial-gradient(circle, #ff1e1e 0%, #b80000 80%);
+  box-shadow:
+    0 0 25px rgba(255, 0, 0, 0.8),
+    0 0 50px rgba(255, 0, 0, 0.5),
+    inset 0 0 25px rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.emergency-btn:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 45px rgba(255, 0, 0, 1),
+    0 0 80px rgba(255, 0, 0, 0.8),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.emergency-btn:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 0 15px rgba(255, 0, 0, 0.7),
+    0 0 30px rgba(255, 0, 0, 0.6),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* glowing ring effect */
+.emergency-btn::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 260px;
+  height: 260px;
+  border: 8px solid rgba(255, 0, 0, 0.5);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.emergency-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  animation: none;
+}
+
+/* ---------- Layout & Root ---------- */
+
+/* make sure the root fills the screen */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* home-screen fills viewport and centers content */
+.home-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* horizontal center of main content */
+  justify-content: center;    /* vertical center of main content */
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-color: #000;     /* tweak if you want */
+  color: #fff;
+}
+
+/* center-area ensures inner centering for the button */
+.center-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* side menu to the right */
+.side-menu {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+/* optional: basic styling for the side links if not defined elsewhere */
+.side-btn {
+  background-color: #fff;
+  color: #e60000;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+.side-btn:hover {
+  background-color: #e60000;
+  color: #fff;
+}
+
+/* ---------- Header (consolidated, flush-left) ---------- */
+/* Use this single block — remove any other .header-left/.glow-title/.pulse-icon duplicates */
+
+.header-left {
+  position: fixed;                          /* pinned to viewport so it won't affect centering */
+  top: 20px;
+  left: 0;                                  /* flush to the viewport left edge */
+  margin: 0;
+  padding-left: 12px;                       /* small breathing room from the edge; set to 0 for true flush */
+  display: flex;
+  flex-direction: column;                   /* stack title + icon vertically */
+  align-items: flex-start;                  /* children aligned to left */
+  text-align: left;
+  z-index: 9999;
+  box-sizing: border-box;
+  pointer-events: auto;
+  /* safe-area for notched devices */
+  padding-left: env(safe-area-inset-left, 12px);
+}
+
+.glow-title {
+  font-size: 42px;
+  font-weight: 900;
+  color: #ff3b3b;
+  text-shadow:
+    0 0 10px #ff0000,
+    0 0 20px #ff3333,
+    0 0 40px #ff0000;
+  animation: glowText 2s ease-in-out infinite alternate;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  align-self: flex-start;
+}
+
+/* glow animation */
+@keyframes glowText {
+  from { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333; }
+  to   { text-shadow: 0 0 25px #ff0000, 0 0 50px #ff3333, 0 0 75px #ff0000; }
+}
+
+/* refresh / pulse icon below title */
+.pulse-icon {
+  font-size: 28px;
+  margin-top: 8px;
+  margin-left: 0;
+  padding: 0;
+  cursor: pointer;
+  animation: heartbeat 3.5s infinite;
+  align-self: flex-start;
+  transform-origin: center;
+  user-select: none;
+  line-height: 1;
+}
+
+/* heartbeat animation */
+@keyframes heartbeat {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  25%  { transform: scale(1.2); opacity: 1;   }
+  50%  { transform: scale(1);   opacity: 0.8; }
+  75%  { transform: scale(1.2); opacity: 1;   }
+  100% { transform: scale(1);   opacity: 0.8; }
+}
+
+.pulse-icon:hover {
+  transform: scale(1.3);
+  text-shadow: 0 0 15px #2c2a2a;
+}

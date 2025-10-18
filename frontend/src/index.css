@@ -1,0 +1,201 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Center everything properly */
+.home-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* take full screen height */
+  background-color: #f5f5f5; /* light background */
+  position: relative;
+}
+
+/* Optional: keep logo and menu fixed on sides */
+.header-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #222;
+  line-height: 1.1;
+}
+
+.mini-icon {
+  font-size: 1.4rem;
+}
+
+/* This is the center area with your big button */
+.center-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Side menu to the right */
+.side-menu {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.side-btn {
+  background-color: #fff;
+  color: #e60000;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.side-btn:hover {
+  background-color: #e60000;
+  color: #fff;
+}
+
+/* Emergency Button styles */
+.emergency-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emergency-button {
+  background-color: #e60000;
+  border: 8px solid #ff9999;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 25px rgba(230, 0, 0, 0.8);
+  transition: all 0.2s ease;
+}
+
+.emergency-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(230, 0, 0, 1);
+}
+
+/* quick compatibility: map old class to new styles */
+.emergency-btn {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #e60000;
+  border: 8px solid #ff9999;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 0 25px rgba(230,0,0,0.8);
+  transition: all 0.2s ease;
+}
+
+.emergency-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(230,0,0,1);
+}
+
+.emergency-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* emulate ring */
+.emergency-btn::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 6px solid rgba(255,0,0,0.45);
+  animation: pulse 2s infinite;
+  z-index: -1;
+}

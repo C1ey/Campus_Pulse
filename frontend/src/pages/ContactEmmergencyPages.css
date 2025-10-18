@@ -1,0 +1,181 @@
+/* File: ContactEmmergencyPage.css */
+
+/* Root page styling */
+:root{
+  --bg: #000;
+  --accent: #9e2aff;
+  --pill: #5a5858;
+  --max-w: 1100px;
+}
+
+/* page container */
+.contact-screen{
+  min-height: 100vh;
+  background: var(--bg);
+  color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* top-left circular badge (large) */
+.home-badge{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  z-index: 99999; /* high so it sits above overlays */
+  background: radial-gradient(circle at 35% 30%, #ff4d4d 0%, #c20000 60%, #7a0000 100%);
+  box-shadow: 0 0 20px rgba(255,0,0,0.6), 0 6px 0 rgba(0,0,0,0.35);
+  text-decoration:none;
+  color: #fff;
+  pointer-events: auto;
+}
+
+/* header: centered title with glow and a small siren on the right */
+.header{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 21px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+}
+
+.glow-title{
+  font-size: 64px;
+  font-weight: 900;
+  margin: 0;
+  color: #fff;
+  text-shadow:
+    0 0 18px rgba(255,255,255,0.95),
+    0 10px 20px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+/* small siren icon (top-right) */
+.siren{
+  width: 56px;
+  height: 56px;
+  margin-left: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff4d4d 0%, #c20000 60%, #7a0000 100%);
+  box-shadow: 0 0 22px 6px rgba(255,50,50,0.8), inset 0 0 8px rgba(255,255,255,0.25);
+  animation: sirenPulse 1.8s infinite ease-in-out;
+  pointer-events: none;
+}
+@keyframes sirenPulse {
+  0% { box-shadow: 0 0 14px 4px rgba(255,80,80,0.7); transform: translateY(0); }
+  50% { box-shadow: 0 0 34px 12px rgba(255,0,0,0.9); transform: translateY(-2px); }
+  100% { box-shadow: 0 0 14px 4px rgba(255,80,80,0.7); transform: translateY(0); }
+}
+
+/* main centered area */
+.contact-area{
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 160px auto 40px; /* leave room for header */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* container holding the stacked cards */
+.contact-cards{
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  align-items: center;
+}
+
+/* each card row */
+.contact-card{
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  background: transparent;
+}
+
+/* left icon area */
+.card-icon{
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 30px;
+}
+.card-icon img{
+  height: 56px;
+  width: auto;
+  display: block;
+}
+.icon-fallback{ /* emoji fallback */
+  font-size: 52px;
+  display: inline-block;
+}
+
+/* center text */
+.card-body{
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.card-body h3{
+  font-size: 40px;
+  margin: 0;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(255,255,255,0.85);
+}
+.card-body .phone{
+  margin: 0;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* right action (call button) */
+.card-action{
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 40px;
+}
+.call-btn{
+  background: var(--pill);
+  border: none;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.35);
+}
+.call-btn:active{ transform: translateY(1px); }
+
+/* smaller screens: stack & reduce */
+@media (max-width: 980px){
+  .glow-title{ font-size: 40px; }
+  .contact-area{ margin: 120px 18px 30px; }
+  .card-icon{ width: 72px; padding-left: 12px; }
+  .card-body h3{ font-size: 26px; }
+  .card-action{ width: 120px; padding-right: 12px; }
+  .call-btn{ padding: 10px 20px; font-size: 16px; border-radius: 22px; }
+}
+
+/* optional: tweak text alignment for pixel-perfect look */
+.contact-card .card-body { text-align: left; }
