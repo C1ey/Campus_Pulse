@@ -1,9 +1,12 @@
-// File: src/components/EmergencyButton.jsx
-import React, { useState, useEffect } from "react";
-import { sendAlert } from "/Users/Cley/campus-pulse/frontend/src/services/alertsServices.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+//October 19, 2025
+//Pulse
 
-/* Geolocation with timeout (unchanged) */
+
+import React, { useState, useEffect } from "react";
+import { sendAlert } from "../services/alertsServices.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // << import useNavigate
+
 function getCurrentPositionPromise(options = {}, timeoutMs = 10000) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error("Geolocation timeout")), timeoutMs);
@@ -19,7 +22,6 @@ function getCurrentPositionPromise(options = {}, timeoutMs = 10000) {
   });
 }
 
-/* Reverse geocode (unchanged) */
 async function reverseGeocode(lat, lng) {
   const googleKey = process.env.REACT_APP_GOOGLE_GEOCODING_API_KEY;
   if (googleKey) {
@@ -36,7 +38,6 @@ async function reverseGeocode(lat, lng) {
       }
     } catch (err) {
       console.warn("Google reverse geocode failed:", err);
-      // fall through to Nominatim
     }
   }
 
@@ -52,7 +53,6 @@ async function reverseGeocode(lat, lng) {
   }
 }
 
-/* wrap promise with timeout (unchanged) */
 function withTimeout(promise, ms = 10000, msg = "Timeout") {
   return Promise.race([
     promise,
@@ -63,9 +63,9 @@ function withTimeout(promise, ms = 10000, msg = "Timeout") {
 export default function EmergencyButton() {
   const [sending, setSending] = useState(false);
   const [authUser, setAuthUser] = useState(null);
+  const navigate = useNavigate(); // << initialize navigate
 
   useEffect(() => {
-    // Track auth state so we can log it and wait briefly if needed.
     const auth = getAuth();
     const unsub = onAuthStateChanged(auth, (u) => {
       setAuthUser(u);
@@ -78,9 +78,6 @@ export default function EmergencyButton() {
     setSending(true);
 
     try {
-      // If your app performs anonymous sign-in at startup, allow a short window
-      // for it to complete before sending. If no auth is present after the wait,
-      // we still continue but will log it.
       if (!authUser) {
         console.log("No auth user yet — waiting 1s for possible anon sign-in...");
         await new Promise((res) => setTimeout(res, 1000));
@@ -88,21 +85,14 @@ export default function EmergencyButton() {
       const userAfterWait = getAuth().currentUser;
       console.log("Sending alert as user:", userAfterWait ? userAfterWait.uid : "NOT_AUTHENTICATED");
 
-      // 1) get coords (10s)
       let coords = null;
       try {
         coords = await getCurrentPositionPromise({ enableHighAccuracy: true }, 10000);
       } catch (err) {
         console.warn("Geolocation failed:", err);
-        // If permission denied, give a clearer hint to the user
-        if (err && err.code === 1) {
-          // PERMISSION_DENIED
-          alert("Location permission was denied. Please enable location in your browser/site settings or continue without location.");
-        }
-        // proceed with null coords (we still allow server to handle)
+        if (err && err.code === 1) alert("Location permission was denied. Please enable location or continue without location.");
       }
 
-      // 2) reverse geocode (8s) if coords present
       let locationName = null;
       if (coords) {
         try {
@@ -113,26 +103,24 @@ export default function EmergencyButton() {
         }
       }
 
-      // 3) build payload - ensure reportedBy is set from actual auth user if available
       const user = getAuth().currentUser;
       const payload = {
         type: "threat",
-        location: coords,             // {lat,lng} or null
-        locationName: locationName,   // human-readable string or null
+        location: coords,
+        locationName: locationName,
         reportedBy: user ? user.uid : null
       };
 
-      // If your Firestore create rule requires request.auth.uid == request.resource.data.reportedBy
-      // and there is no auth user, the write will be rejected. Log a clear message.
-      if (!user) {
-        console.warn("No authenticated user when sending alert. Firestore may reject the write if rules require auth.");
-      }
+      if (!user) console.warn("No authenticated user when sending alert. Firestore may reject the write if rules require auth.");
 
-      // 4) send to backend / firestore with timeout (10s)
       await withTimeout(sendAlert(payload), 10000, "sendAlert timed out");
 
       console.log("Alert sent", payload);
       alert("Alert sent successfully.");
+
+      // << Navigate to the Contact Emergency page after sending alert
+      navigate("/contact-emergency");
+
     } catch (err) {
       console.error("Failed to send alert:", err);
       alert("Failed to send alert: " + (err.message || err));
@@ -148,7 +136,7 @@ export default function EmergencyButton() {
       aria-label="Send emergency alert"
       disabled={sending}
     >
-      {sending ? "Sending..." : "PULSE"}
+      {sending ? "Sending..." : "SOS"}
     </button>
   );
 }

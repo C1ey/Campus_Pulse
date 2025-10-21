@@ -1,14 +1,14 @@
-// File: src/App.jsx
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "/Users/Cley/campus-pulse/frontend/src/pages/Home.jsx";
-import MapPage from "/Users/Cley/campus-pulse/frontend/src/pages/MapPage.jsx";
-import ContactEmergencyPage from "/Users/Cley/campus-pulse/frontend/src/pages/ContactEmmergencyPage.jsx";
-import CreateAccountPage from "/Users/Cley/campus-pulse/frontend/src/pages/CreateAccountPage.jsx";
-import LoginPage from "/Users/Cley/campus-pulse/frontend/src/pages/LoginPage.jsx";
-import Recent from "/Users/Cley/campus-pulse/frontend/src/pages/Recent.jsx";
-import ReportIncidentPage from "/Users/Cley/campus-pulse/frontend/src/pages/ReportIncidentPage.jsx";
+import Home from "../frontend/src/pages/Home.jsx";
+import MapPage from "../frontend/src/pages/MapPage.jsx";
+import ContactEmergencyPage from "../frontend/src/pages/ContactEmmergencyPage.jsx";
+import CreateAccountPage from "../frontend/src/pages/CreateAccountPage.jsx";
+import LoginPage from "../frontend/src/pages/LoginPage.jsx";
+import Recent from "../frontend/src/pages/Recent.jsx";
+import ReportIncidentPage from "../frontend/src/pages/ReportIncidentPage.jsx";
 
 export default function App() {
   return (

@@ -1,5 +1,5 @@
 import { collection, addDoc, serverTimestamp, getDocs, deleteDoc } from "firebase/firestore";
-import { db } from "/Users/Cley/campus-pulse/frontend/src/firebase.js";
+import { db } from "../frontend/src/firebase.js";
 
 // 1️⃣ Function to create a new alert
 export async function sendAlert({ type="medical", location, reportedBy=null }) {

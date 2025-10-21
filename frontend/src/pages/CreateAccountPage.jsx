@@ -1,11 +1,11 @@
-// File: src/pages/CreateAccountPage.jsx
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   updateProfile
 } from "firebase/auth";
-import { auth } from "/Users/Cley/campus-pulse/frontend/src/firebase.js";
+import { auth } from "../frontend/src/firebase.js";
 import "./CreateAccountPage.css";
 
 export default function CreateAccountPage() {

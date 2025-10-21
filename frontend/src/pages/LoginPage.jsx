@@ -1,9 +1,9 @@
-// File: src/pages/LoginPage.jsx
+
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "/Users/Cley/campus-pulse/frontend/src/firebase.js";
+import { auth } from "../frontend/src/firebase.js";
 import { useNavigate, Link } from "react-router-dom";
-import "/Users/Cley/campus-pulse/frontend/src/pages/LoginPage.css";
+import "../frontend/src/pages/LoginPage.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

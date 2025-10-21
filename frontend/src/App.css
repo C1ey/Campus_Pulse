@@ -1,9 +1,4 @@
-/* ---------------------------
-   App.css (final — copy/paste)
-   ---------------------------
-*/
 
-/* --- Emergency Button Styling --- */
 .emergency-btn {
   width: 220px;
   height: 220px;
@@ -75,7 +70,6 @@
   animation: none;
 }
 
-/* ---------- Layout & Root ---------- */
 
 /* make sure the root fills the screen */
 html, body, #root {
@@ -132,8 +126,7 @@ html, body, #root {
   color: #fff;
 }
 
-/* ---------- Header (consolidated, flush-left) ---------- */
-/* Use this single block — remove any other .header-left/.glow-title/.pulse-icon duplicates */
+
 
 .header-left {
   position: fixed;                          /* pinned to viewport so it won't affect centering */

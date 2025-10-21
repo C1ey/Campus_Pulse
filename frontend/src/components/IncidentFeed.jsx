@@ -1,7 +1,10 @@
-// File: src/components/IncidentFeed.jsx
+//October 19, 2025
+//Pulse
+
+
 import React, { useState } from "react";
-import useAlerts from "/Users/Cley/campus-pulse/frontend/src/hooks/useAlerts.js";
-import { resolveAlert } from "/Users/Cley/campus-pulse/frontend/alertsService.js";
+import useAlerts from "../frontend/src/hooks/useAlerts.js";
+import { resolveAlert } from "../frontend/alertsService.js";
 
 function displayPlaceForAlert(a) {
   if (a.locationName) return a.locationName;

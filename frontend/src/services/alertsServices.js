@@ -1,9 +1,5 @@
-// File: src/services/alertsService.js
-// Path: src/services/alertsService.js
-
 import {
   collection,
-  addDoc,
   serverTimestamp,
   getDocs,
   query,
@@ -14,43 +10,37 @@ import {
   updateDoc,
   Timestamp
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase"; // Assuming this is the initialized Firestore instance
 
 const alertsCol = collection(db, "alerts");
 
-/**
- * sendAlert
- * payload example:
- * {
- *   type: "threat",
- *   location: { lat: 18.0000, lng: -76.0000 } | null,
- *   locationName: "UWI Mona Library" | null,
- *   reportedBy: "uid" | null
- * }
- *
- * Returns: { id: <newDocId> } on success, throws on error.
- */
-export async function sendAlert({ type = "medical", location = null, locationName = null, reportedBy = null } = {}) {
-  try {
-    // expire in 7 days (stored as Firestore Timestamp)
-    const expiresAt = Timestamp.fromDate(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000));
+// CRITICAL FIX: The API_URL points to the deployed Cloud Function
+const API_URL = '/api/create-alert'; 
 
-    const docRef = await addDoc(alertsCol, {
-      type,
-      location,
-      locationName: locationName ?? null,
-      createdAt: serverTimestamp(),
-      expiresAt,
-      status: "active",
-      reportedBy: reportedBy ?? null,
+/**
+ * sendAlert: Sends alert data to the Cloud Function API for secure processing.
+ */
+export async function sendAlert(payload) {
+  try {
+    // Making the HTTP call to the Cloud Function
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
     });
 
-    // Return something simple to the caller
-    return { id: docRef.id };
-  } catch (err) {
-    console.error("alertsService.sendAlert error:", err);
-    // Rethrow so callers (UI) can catch and handle
-    throw err;
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`API Error ${response.status}: ${errorText}`);
+    }
+
+    // The Cloud Function should return the ID of the newly created alert document
+    return response.json();
+  } catch (error) {
+    console.error("Failed to send alert via service:", error);
+    throw error;
   }
 }
 
@@ -70,7 +60,6 @@ export async function resolveAlert(alertId) {
 
 /**
  * getActiveAlerts
- * Returns array of alerts with fields: id, type, location, locationName, createdAt, expiresAt, status, reportedBy
  */
 export async function getActiveAlerts() {
   try {
@@ -91,7 +80,7 @@ export async function getActiveAlerts() {
 }
 
 /**
- * Optional helper to delete an alert (not currently used but handy)
+ * Optional helper to delete an alert
  */
 export async function deleteAlert(alertId) {
   try {

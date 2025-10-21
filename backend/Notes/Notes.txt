@@ -1,0 +1,8 @@
+API keys needed in .env and port number
+
+Removed files (These files were removed for safety)
+serviceAccount.json 
+
+You will have to fix paths 
+
+firebase-debug files was also removed

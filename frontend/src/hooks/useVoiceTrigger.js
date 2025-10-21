@@ -1,4 +1,4 @@
-// src/hooks/useVoiceTrigger.js
+
 import { useEffect } from "react";
 import { sendAlert } from "../services/alertsService";
 

@@ -1,7 +1,7 @@
-// File: src/pages/ContactEmmergencyPage.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
-import "/Users/Cley/campus-pulse/frontend/src/pages/ContactEmmergencyPages.css";
+import "../pages/ContactEmmergencyPages.css";
 
 export default function ContactEmmergencyPage() {
   return (
@@ -13,7 +13,7 @@ export default function ContactEmmergencyPage() {
 
       {/* centered header */}
       <div className="header" role="banner">
-        <h1 className="glow-title">Contact Emmergency</h1>
+        <h1 className="glow-title">Contact Emergency</h1>
         <div className="siren" aria-hidden="true" />
       </div>
 

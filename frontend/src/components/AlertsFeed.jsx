@@ -1,9 +1,13 @@
-// File: src/components/AlertsFeed.jsx
+//October 19, 2025
+//Pulse
+
 import React, { useEffect, useState } from "react";
-import { getActiveAlerts } from "/Users/Cley/campus-pulse/frontend/alertsService.js"; // keep your project's import style
+import { getActiveAlerts } from "../frontend/alertsService.js"; // keep project import style
 
 function displayPlaceForAlert(a) {
   if (a.locationName) return a.locationName;
+  if (a.areaName) return a.areaName;               // prefer areaName if backend sets it
+  if (a.location?.displayName) return a.location.displayName;
   if (a.location?.name) return a.location.name;
   if (typeof a.location?.lat === "number" && typeof a.location?.lng === "number") {
     return `${a.location.lat.toFixed(4)}, ${a.location.lng.toFixed(4)}`;
@@ -36,7 +40,7 @@ export default function AlertsFeed() {
 
   return (
     <div className="alerts-feed-inner">
-      <h2>Active Alerts</h2>
+      <h2>Most Recent Alerts</h2>
       <ul>
         {alerts.length > 0 ? (
           alerts.map((a) => {

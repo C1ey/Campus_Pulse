@@ -1,4 +1,4 @@
-// File: src/pages/MapPage.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
 import MapView from "../components/MapView.jsx";

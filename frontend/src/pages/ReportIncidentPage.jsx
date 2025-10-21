@@ -1,6 +1,6 @@
-// File: src/pages/ReportIncidentPage.jsx
+
 import React, { useState } from "react";
-import { sendAlert } from "/Users/Cley/campus-pulse/frontend/alertsService.js";
+import { sendAlert } from "../frontend/alertsService.js";
 import { Link, useNavigate } from "react-router-dom";
 import "./ReportIncidentPage.css";
 
@@ -101,9 +101,9 @@ export default function ReportIncidentPage() {
               onChange={(e) => setType(e.target.value)}
             >
               <option value="">Choose...</option>
+              <option value="robbery">Robbery</option>
               <option value="medical">Medical</option>
               <option value="fire">Fire</option>
-              <option value="threat">Threat</option>
               <option value="other">Other</option>
             </select>
           </div>

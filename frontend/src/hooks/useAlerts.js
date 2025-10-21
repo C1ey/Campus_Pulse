@@ -1,5 +1,3 @@
-// File: src/hooks/useAlerts.js
-// Path: src/hooks/useAlerts.js
 
 import { useEffect, useState, useRef } from "react";
 import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";

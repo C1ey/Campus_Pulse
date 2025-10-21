@@ -1,7 +1,7 @@
-// File: src/pages/Home.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
-import EmergencyButton from "/Users/Cley/campus-pulse/frontend/src/components/EmergencyButton.jsx";
+import EmergencyButton from "..frontend/src/components/EmergencyButton.jsx";
 
 export default function Home() {
   const refreshPage = () => window.location.reload();
@@ -22,7 +22,7 @@ export default function Home() {
 
       <div className="side-menu">
         <Link className="side-btn" to="/report">Report Incident</Link>
-        <Link className="side-btn" to="/map">Map</Link>
+        <Link className="side-btn" to="/map">Danger Zones</Link>
         <Link className="side-btn" to="/contact-emergency">Contact Emergency</Link>
         <Link className="side-btn" to="/recent">Recent Reports</Link>
         <Link className="side-btn" to="/login">Log In</Link>

@@ -14,7 +14,7 @@
   --form-top-space: 180px; /* current comfortable spacing */
 }
 
-/* ---------- Page root ---------- */
+/* root */
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -33,7 +33,7 @@ html, body, #root {
   overflow-x: hidden;
 }
 
-/* ---------- Left badge & back button (fixed) ---------- */
+/*  Left badge & back button (fixed) */
 .exclamation-badge{
   position: fixed;
   top: 14px;
@@ -68,7 +68,7 @@ html, body, #root {
   z-index: 10002; /* highest so it's always clickable */
 }
 
-/* ---------- Header (centered visually) ---------- */
+/*  Header (centered visually) */
 .header{
   position: absolute;
   left: 50%;
@@ -120,7 +120,7 @@ html, body, #root {
   .siren { animation: none; box-shadow: 0 0 18px 6px rgba(255,80,80,0.8); transform: none; }
 }
 
-/* ---------- Form (centered, constrained) ---------- */
+/*  Form (centered, constrained) */
 .form-container{
   width: 100%;
   max-width: var(--max-w);
@@ -249,7 +249,7 @@ html, body, #root {
 }
 .send-pill:disabled{ opacity: 0.6; cursor: not-allowed; }
 
-/* ---------- Responsive tweaks ---------- */
+/* Responsive tweaks  */
 @media (max-width: 880px){
   :root {
     --form-top-space: 120px;

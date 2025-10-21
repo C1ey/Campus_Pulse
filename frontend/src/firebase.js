@@ -1,17 +1,16 @@
-// File: src/firebase.js
-// Path: src/firebase.js
+
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "campus-14547.firebaseapp.com",
-  projectId: "campus-14547",
-  storageBucket: "campus-14547.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "Insert key",
+  authDomain: "Insert Domain Name",
+  projectId: "Insert ID",
+  storageBucket: "Inser storage Bucket",
+  messagingSenderId: "Insert Sender ID",
+  appId: "Insert ID",
 };
 
 const app = initializeApp(firebaseConfig);
